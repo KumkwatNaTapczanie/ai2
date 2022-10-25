@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MeteoData index{% endblock %}
+
+{% block body %}
+    <h1>MeteoData index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>HighestTemperature</th>
+                <th>LowestTemperature</th>
+                <th>AverageWindSpeed</th>
+                <th>Overcast</th>
+                <th>PrecipitationKind</th>
+                <th>PrecipitationIntensity</th>
+                <th>Humidity</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for meteo_datum in meteo_datas %}
+            <tr>
+                <td>{{ meteo_datum.id }}</td>
+                <td>{{ meteo_datum.date ? meteo_datum.date|date('Y-m-d') : '' }}</td>
+                <td>{{ meteo_datum.highestTemperature }}</td>
+                <td>{{ meteo_datum.lowestTemperature }}</td>
+                <td>{{ meteo_datum.averageWindSpeed }}</td>
+                <td>{{ meteo_datum.overcast }}</td>
+                <td>{{ meteo_datum.precipitationKind }}</td>
+                <td>{{ meteo_datum.precipitationIntensity }}</td>
+                <td>{{ meteo_datum.humidity }}</td>
+                <td>
+                    <a href="{{ path('app_meteo_data_show', {'id': meteo_datum.id}) }}">show</a>
+                    <a href="{{ path('app_meteo_data_edit', {'id': meteo_datum.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_meteo_data_new') }}">Create new</a>
+{% endblock %}
