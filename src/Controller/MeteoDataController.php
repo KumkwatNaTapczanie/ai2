@@ -10,10 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/meteo/data')]
 class MeteoDataController extends AbstractController
 {
+    #[IsGranted("ROLE_METEODATA_INDEX")]
     #[Route('/', name: 'app_meteo_data_index', methods: ['GET'])]
     public function index(MeteoDataRepository $meteoDataRepository): Response
     {
@@ -22,6 +25,7 @@ class MeteoDataController extends AbstractController
         ]);
     }
 
+    #[IsGranted("ROLE_METEODATA_CREATE")]
     #[Route('/new', name: 'app_meteo_data_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -44,6 +48,7 @@ class MeteoDataController extends AbstractController
         ]);
     }
 
+    #[IsGranted("ROLE_METEODATA_SHOW")]
     #[Route('/{id}', name: 'app_meteo_data_show', methods: ['GET'])]
     public function show(MeteoData $meteoDatum): Response
     {
@@ -52,6 +57,7 @@ class MeteoDataController extends AbstractController
         ]);
     }
 
+    #[IsGranted("ROLE_METEODATA_EDIT")]
     #[Route('/{id}/edit', name: 'app_meteo_data_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, MeteoData $meteoDatum, EntityManagerInterface $entityManager): Response
     {
@@ -72,6 +78,7 @@ class MeteoDataController extends AbstractController
         ]);
     }
 
+    #[IsGranted("ROLE_METEODATA_DELETE")]
     #[Route('/{id}', name: 'app_meteo_data_delete', methods: ['POST'])]
     public function delete(Request $request, MeteoData $meteoDatum, EntityManagerInterface $entityManager): Response
     {

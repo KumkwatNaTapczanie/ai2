@@ -33,8 +33,13 @@
                 <td>{{ meteo_datum.precipitationIntensity }}</td>
                 <td>{{ meteo_datum.humidity }}</td>
                 <td>
-                    <a href="{{ path('app_meteo_data_show', {'id': meteo_datum.id}) }}">show</a>
-                    <a href="{{ path('app_meteo_data_edit', {'id': meteo_datum.id}) }}">edit</a>
+                    {% if is_granted('ROLE_METEODATA_SHOW') %}
+                        <a href="{{ path('app_meteo_data_show', {'id': meteo_datum.id}) }}">show</a>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_METEODATA_EDIT') %}
+                        <a href="{{ path('app_meteo_data_edit', {'id': meteo_datum.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -45,5 +50,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_meteo_data_new') }}">Create new</a>
+    {% if is_granted('ROLE_METEODATA_CREATE') %}
+        <a href="{{ path('app_meteo_data_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

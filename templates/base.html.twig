@@ -16,8 +16,12 @@
     <body>
         {% block navbar %}
             <ul>
-                <li><a href="{{ path('app_meteo_data_index') }}">MeteoData</a></li>
-                <li><a href="{{ path('app_location_index') }}">Location</a></li>
+                {% if is_granted('ROLE_METEODATA_INDEX') %}
+                    <li><a href="{{ path('app_meteo_data_index') }}">MeteoData</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_LOCATION_INDEX') %}
+                    <li><a href="{{ path('app_location_index') }}">Location</a></li>
+                {% endif %}
             </ul>
         {% endblock %}
         {% block body %}{% endblock %}
