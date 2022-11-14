@@ -1,5 +1,5 @@
 weather_in_city:
-  path: /weather/{city}
+  path: /weather/{country}/{city}
   controller: App\Controller\WeatherController:cityAction
   requirements:
-    city: \d+
+    country: "[A-Z]{2}"
