@@ -76,6 +76,11 @@ class MeteoData
         return $this->highestTemperature;
     }
 
+    public function getHighestTemperatureF(): ?string
+    {
+        return ($this->highestTemperature * 9 / 5) + 32;
+    }
+
     public function setHighestTemperature(string $highestTemperature): self
     {
         $this->highestTemperature = $highestTemperature;
@@ -86,6 +91,11 @@ class MeteoData
     public function getLowestTemperature(): ?string
     {
         return $this->lowestTemperature;
+    }
+
+    public function getLowestTemperatureF(): ?string
+    {
+        return ($this->lowestTemperature * 9 / 5) + 32;
     }
 
     public function setLowestTemperature(string $lowestTemperature): self
